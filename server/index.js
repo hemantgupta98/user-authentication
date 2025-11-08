@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 app.post("/api/business", async (req, res) => {
   try {
     const doc = await User.create(req.body);
-    res.json({ msg: "Data Saved", data: doc });
+    return res.json({ msg: "Data Saved", data: doc });
   } catch (error) {
     res.status(500).json({ msg: "Error saving", error });
   }
