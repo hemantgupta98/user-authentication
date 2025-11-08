@@ -3,7 +3,7 @@ const port = 8000;
 const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
-const { User } = require("../models/user");
+const { User } = require("../server/models/user");
 const { Router } = require("express");
 
 app.use(cors());
@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
   res.send("hello");
 });
 
-app.get("/api/business", async (req, res) => {
+app.post("/api/business", async (req, res) => {
   try {
     const doc = await User.create(req.body);
     res.json({ msg: "Data Saved", data: doc });
