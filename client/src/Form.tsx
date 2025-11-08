@@ -24,7 +24,7 @@ interface BusinessFormData {
   latitude?: number;
   longitude?: number;
   outlets: number;
-  file: string;
+  file?: FileList | null;
 }
 
 const businessTypes = [
@@ -91,9 +91,23 @@ export default function BusinessDetailsForm() {
     );
   };
 
-  const onSubmit = (data: BusinessFormData) => {
-    console.log("Form submitted:", data);
-    alert("Form submitted successfully! Check console for data.");
+  const onSubmit = async (data: BusinessFormData) => {
+    try {
+      const res = await fetch("http://localhost:8000/api/business", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+      console.log("Response:", result);
+
+      alert("submitted ✅");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const latitude = watch("latitude");
