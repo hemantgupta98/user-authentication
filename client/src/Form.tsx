@@ -10,7 +10,7 @@ interface BusinessFormData {
   businessType: string;
   businessCategory: string;
   gstin?: string;
-  pan?: string;
+  pan?: number;
   phone: string;
   email: string;
   website?: string;
@@ -108,6 +108,7 @@ export default function BusinessDetailsForm() {
     } catch (err) {
       console.log(err);
     }
+    console.log(data);
   };
 
   const latitude = watch("latitude");
@@ -247,20 +248,10 @@ export default function BusinessDetailsForm() {
                     PAN <span className="text-red-500">*</span>
                   </label>
                   <input
-                    {...register("pan", {
-                      required: "PAN is required",
-                      pattern: {
-                        value: /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/,
-                        message: "Invalid PAN format",
-                      },
-                      maxLength: {
-                        value: 10,
-                        message: "PAN must be 10 characters",
-                      },
-                    })}
+                    {...register("pan", {})}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent uppercase"
                     placeholder="10 character PAN"
-                    maxLength={10}
+                    maxLength={1}
                   />
                   {errors.pan && (
                     <p className="text-red-500 text-sm mt-1">
