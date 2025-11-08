@@ -10,7 +10,7 @@ interface BusinessFormData {
   businessType: string;
   businessCategory: string;
   gstin?: string;
-  pan: string;
+  pan?: string;
   phone: string;
   email: string;
   website?: string;
@@ -24,6 +24,7 @@ interface BusinessFormData {
   latitude?: number;
   longitude?: number;
   outlets: number;
+  file: string;
 }
 
 const businessTypes = [
@@ -449,6 +450,21 @@ export default function BusinessDetailsForm() {
                     </p>
                   )}
                 </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1 mt-5">
+                  File upload <span className="text-red-500">*</span>
+                </label>
+                <input
+                  {...register("file", { required: "City is required" })}
+                  className="w-1/4 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent "
+                  type="file"
+                />
+                {errors.city && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.city.message}
+                  </p>
+                )}
               </div>
             </section>
 
