@@ -95,11 +95,12 @@ export default function BusinessDetailsForm() {
     console.log("Form submitted:", data);
     alert("Form submitted successfully! Check console for data.");
     try {
-      const res = await fetch("http://localhost:8000/api/business", {
+      const res = await fetch("http://localhost:8000/api/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(data),
       });
 

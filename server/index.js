@@ -5,12 +5,8 @@ const app = express();
 const cors = require("cors");
 const { User } = require("../server/models/user");
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
 const corsOptions = {
-  origin: "http://localhost:5173/",
+  origin: "http://localhost:5173",
   optionsSuccessStatus: 200,
   methods: "GET, POST, PUT, DELETE PATCH HEAD",
   credentials: true,
@@ -25,18 +21,9 @@ mongoose
   .then((e) => console.log("mongodb is connected"))
   .catch((Error) => console.log(Error));
 
-app.get("/", (req, res) => {
-  res.send("hello");
-});
-
-app.post("/api/business", async (req, res) => {
-  try {
-    const doc = await User.create(req.body);
-    console.log("doc shared", doc);
-    return res.json({ msg: "Data Saved", data: doc });
-  } catch (error) {
-    res.status(500).json({ msg: "Error ", error });
-  }
+app.post("/api/user", (req, res) => {
+  console.log(req.body);
+  return res.json(req.body);
 });
 
 app.listen(port, () => console.log("server is connected 8000"));
