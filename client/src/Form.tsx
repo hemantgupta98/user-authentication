@@ -105,12 +105,9 @@ export default function BusinessDetailsForm() {
 
       const result = await res.json();
       console.log("Response:", result);
-
-      alert("submitted ✅");
     } catch (err) {
       console.log(err);
     }
-    console.log(data);
   };
 
   const latitude = watch("latitude");

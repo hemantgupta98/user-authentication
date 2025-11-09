@@ -4,9 +4,19 @@ const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
 const { User } = require("../server/models/user");
-const { Router } = require("express");
 
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+const corsOptions = {
+  origin: "http://localhost:5173/",
+  optionsSuccessStatus: 200,
+  methods: "GET, POST, PUT, DELETE PATCH HEAD",
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -22,9 +32,10 @@ app.get("/", (req, res) => {
 app.post("/api/business", async (req, res) => {
   try {
     const doc = await User.create(req.body);
+    console.log("doc shared", doc);
     return res.json({ msg: "Data Saved", data: doc });
   } catch (error) {
-    res.status(500).json({ msg: "Error saving", error });
+    res.status(500).json({ msg: "Error ", error });
   }
 });
 
